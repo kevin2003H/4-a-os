@@ -602,3 +602,67 @@
     margin-bottom: 20px;
   }
 }
+/* Scroll vertical para toda la página */
+html {
+  min-height: 100%;
+  height: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100%;
+  height: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+#root {
+  min-height: 100vh;
+  height: auto;
+}
+
+.app {
+  min-height: 100vh;
+  height: auto;
+  overflow-x: hidden;
+  overflow-y: visible;
+}
+
+/* Evitar que la carta limite su altura */
+.letter-container {
+  height: auto;
+  min-height: 0;
+  overflow: visible;
+}
+
+.letter-card {
+  height: auto;
+  overflow: visible;
+}
+
+.letter-message {
+  height: auto;
+  overflow: visible;
+}
+
+/* Ajustes para celulares */
+@media (max-width: 600px) {
+  .app {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding-bottom: 40px;
+  }
+
+  .letter-container {
+    width: 100%;
+    margin: 15px auto;
+  }
+
+  .letter-card {
+    width: 100%;
+  }
+}
