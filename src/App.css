@@ -550,3 +550,55 @@
     font-size: 15px;
   }
 }
+/* Ajustes para lectura en celulares */
+@media (max-width: 600px) {
+  html,
+  body,
+  #root {
+    min-height: 100%;
+    height: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  body {
+    position: relative;
+  }
+
+  .app {
+    min-height: 100vh;
+    height: auto;
+    overflow-x: hidden;
+    overflow-y: visible;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 20px 12px 40px;
+  }
+
+  .letter-container {
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    margin: 15px auto;
+    overflow: visible;
+  }
+
+  .letter-card {
+    width: 100%;
+    height: auto;
+    overflow: visible;
+    padding: 30px 22px;
+  }
+
+  .letter-message {
+    height: auto;
+    overflow: visible;
+    line-height: 1.8;
+  }
+
+  .letter-message p {
+    margin-bottom: 20px;
+  }
+}
