@@ -1,0 +1,552 @@
+
+/* =========================================
+   CONFIGURACIÓN GENERAL
+========================================= */
+
+:root {
+  --pink: #d9829b;
+  --dark-pink: #a84f6b;
+  --light-pink: #fce8ed;
+  --cream: #fffaf3;
+  --wine: #814052;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.app {
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 30px 18px;
+
+  background:
+    radial-gradient(ellipse at 15% 15%, #fff6f5 0%, transparent 35%),
+    radial-gradient(ellipse at 85% 80%, #f8cad7 0%, transparent 40%),
+    linear-gradient(135deg, #fbe8ed, #f6d4df, #fcebef);
+
+  color: var(--wine);
+}
+
+/* Luces decorativas */
+
+.app::before,
+.app::after {
+  content: "";
+  position: absolute;
+  width: 350px;
+  height: 350px;
+  border-radius: 50%;
+  filter: blur(90px);
+  pointer-events: none;
+  opacity: 0.45;
+}
+
+.app::before {
+  background: #fff;
+  top: -150px;
+  left: -100px;
+}
+
+.app::after {
+  background: #e9a5ba;
+  bottom: -180px;
+  right: -100px;
+}
+
+/* =========================================
+   CORAZONES FLOTANTES
+========================================= */
+
+.hearts {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.hearts span {
+  position: absolute;
+  bottom: -50px;
+  color: rgba(190, 91, 121, 0.28);
+  animation: floatHeart 12s linear infinite;
+  font-size: 22px;
+  user-select: none;
+}
+
+.hearts span:nth-child(1) { left: 5%; animation-delay: 0s; }
+.hearts span:nth-child(2) { left: 12%; animation-delay: 3s; font-size: 16px; }
+.hearts span:nth-child(3) { left: 22%; animation-delay: 6s; }
+.hearts span:nth-child(4) { left: 32%; animation-delay: 2s; font-size: 14px; }
+.hearts span:nth-child(5) { left: 43%; animation-delay: 5s; }
+.hearts span:nth-child(6) { left: 55%; animation-delay: 1s; }
+.hearts span:nth-child(7) { left: 65%; animation-delay: 7s; font-size: 17px; }
+.hearts span:nth-child(8) { left: 76%; animation-delay: 3s; }
+.hearts span:nth-child(9) { left: 87%; animation-delay: 5s; font-size: 15px; }
+.hearts span:nth-child(10) { left: 95%; animation-delay: 1s; }
+
+@keyframes floatHeart {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0;
+  }
+
+  15% {
+    opacity: 0.8;
+  }
+
+  85% {
+    opacity: 0.6;
+  }
+
+  100% {
+    transform: translateY(-110vh) rotate(35deg);
+    opacity: 0;
+  }
+}
+
+/* =========================================
+   PANTALLA INICIAL
+========================================= */
+
+.envelope-container {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  width: 100%;
+  animation: entrance 1.5s ease;
+}
+
+.subtitle {
+  color: #a76b7e;
+  font-size: 13px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.envelope-container h1 {
+  font-family: Georgia, serif;
+  font-size: clamp(32px, 6vw, 48px);
+  font-weight: normal;
+  font-style: italic;
+  color: #91485f;
+  margin-bottom: 75px;
+  text-shadow: 0 3px 15px rgba(160, 70, 100, 0.1);
+}
+
+/* =========================================
+   SOBRE
+========================================= */
+
+.envelope {
+  position: relative;
+  display: block;
+  width: min(320px, 80vw);
+  height: 205px;
+  margin: auto;
+
+  border: none;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+
+  filter: drop-shadow(0 22px 22px rgba(130, 55, 78, 0.22));
+  transition: transform 0.5s ease;
+  perspective: 1000px;
+}
+
+.envelope:hover {
+  transform: translateY(-10px) scale(1.035);
+}
+
+.envelope-back {
+  position: absolute;
+  inset: 0;
+  border-radius: 9px;
+  background: linear-gradient(145deg, #d88da2, #b96782);
+  box-shadow: inset 0 2px 10px rgba(255,255,255,0.3);
+}
+
+.letter-preview {
+  position: absolute;
+  width: 88%;
+  height: 175px;
+  left: 6%;
+  top: 8px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: linear-gradient(135deg, #fffdf8, #f9eee5);
+  border: 1px solid #ead5cc;
+  color: #a75d73;
+  font-family: Georgia, serif;
+  font-style: italic;
+  font-size: 17px;
+
+  border-radius: 4px;
+}
+
+.envelope-front {
+  position: absolute;
+  inset: 0;
+  border-radius: 9px;
+
+  background: linear-gradient(145deg, #e8a6b9, #d17d99);
+
+  clip-path: polygon(
+    0 0,
+    50% 60%,
+    100% 0,
+    100% 100%,
+    0 100%
+  );
+}
+
+.envelope-flap {
+  position: absolute;
+  inset: 0;
+
+  background: linear-gradient(135deg, #f2bdca, #d88da5);
+
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    50% 58%
+  );
+
+  filter: drop-shadow(0 3px 4px rgba(120, 50, 70, 0.1));
+}
+
+.envelope-heart {
+  position: absolute;
+  top: 83px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 4;
+
+  color: #fff8f5;
+  font-size: 36px;
+  text-shadow: 0 3px 10px rgba(120, 30, 60, 0.25);
+
+  animation: heartbeat 1.5s infinite;
+}
+
+@keyframes heartbeat {
+  0%, 100% {
+    transform: translateX(-50%) scale(1);
+  }
+
+  50% {
+    transform: translateX(-50%) scale(1.2);
+  }
+}
+
+.click-text {
+  margin-top: 45px;
+  color: #a36c7c;
+  font-size: 13px;
+  letter-spacing: 1px;
+  animation: softPulse 2.5s infinite;
+}
+
+@keyframes softPulse {
+  0%, 100% { opacity: 0.65; }
+  50% { opacity: 1; }
+}
+
+/* =========================================
+   CARTA
+========================================= */
+
+.letter-container {
+  position: relative;
+  z-index: 5;
+  width: 100%;
+  max-width: 690px;
+  animation: letterAppear 1.3s cubic-bezier(.2,.8,.2,1);
+}
+
+.letter-card {
+  position: relative;
+  padding: 55px 60px;
+
+  background:
+    radial-gradient(circle at top right, #fff 0%, transparent 40%),
+    linear-gradient(145deg, #fffdf9, #fff7ee);
+
+  border: 1px solid #ead7c9;
+  outline: 1px solid rgba(255,255,255,0.8);
+  outline-offset: -9px;
+
+  border-radius: 5px;
+
+  box-shadow:
+    0 25px 70px rgba(100, 42, 60, 0.16),
+    0 5px 15px rgba(100, 42, 60, 0.08);
+
+  text-align: center;
+}
+
+.letter-decoration {
+  display: block;
+  color: #d7839c;
+  font-size: 42px;
+  animation: heartbeat 1.8s infinite;
+}
+
+.letter-card h1 {
+  font-family: Georgia, serif;
+  font-style: italic;
+  font-weight: normal;
+  font-size: clamp(26px, 5vw, 38px);
+  color: #984d65;
+  margin: 18px 0;
+}
+
+.letter-date {
+  font-size: 13px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #bd8190;
+  margin-bottom: 35px;
+}
+
+.letter-message {
+  text-align: left;
+  color: #72515a;
+  font-family: Georgia, serif;
+  font-size: 17px;
+  line-height: 2;
+  white-space: pre-line;
+}
+
+.letter-message p {
+  margin-bottom: 18px;
+}
+
+.letter-footer {
+  margin-top: 40px;
+  padding-top: 25px;
+  border-top: 1px solid #eed9d8;
+
+  color: #a75b73;
+  font-family: Georgia, serif;
+  font-style: italic;
+  font-size: 18px;
+  line-height: 1.9;
+}
+
+@keyframes entrance {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes letterAppear {
+  from {
+    opacity: 0;
+    transform: translateY(50px) scale(0.94);
+    filter: blur(5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 600px) {
+  .app {
+    padding: 20px 15px;
+  }
+
+  .envelope-container h1 {
+    margin-bottom: 65px;
+  }
+
+  .envelope {
+    height: 180px;
+  }
+
+  .letter-card {
+    padding: 40px 28px;
+  }
+
+  .letter-message {
+    font-size: 15px;
+    line-height: 1.9;
+  }
+
+  .letter-date {
+    font-size: 11px;
+    letter-spacing: 1px;
+  }
+}
+
+/* =========================================
+   ANIMACIÓN DE APERTURA DEL SOBRE
+========================================= */
+
+/* Perspectiva para la solapa */
+
+.envelope {
+  perspective: 1000px;
+  overflow: visible;
+}
+
+/* Solapa superior */
+
+.envelope-flap {
+  z-index: 5;
+  transform-origin: top center;
+  transform: rotateX(0deg);
+  transition:
+    transform 0.8s ease-in-out,
+    opacity 0.5s ease;
+  backface-visibility: visible;
+}
+
+/* Corazón */
+
+.envelope-heart {
+  transition: opacity 0.3s ease;
+}
+
+/* Carta interior */
+
+.letter-preview {
+  z-index: 2;
+  transition:
+    transform 0.9s ease-in-out,
+    opacity 0.5s ease;
+}
+
+/* Al comenzar la apertura */
+
+.envelope.opening {
+  animation: envelopeDisappear 1.2s ease forwards;
+  pointer-events: none;
+}
+
+.envelope.opening .envelope-flap {
+  transform: rotateX(180deg);
+}
+
+.envelope.opening .letter-preview {
+  transform: translateY(-125px);
+  transition-delay: 0.25s;
+}
+
+.envelope.opening .envelope-heart {
+  opacity: 0;
+}
+
+/* Desaparición del sobre */
+
+@keyframes envelopeDisappear {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+
+  65% {
+    transform: translateY(-15px) scale(1.02);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(-45px) scale(0.85);
+    opacity: 0;
+  }
+}
+
+/* Entrada de la carta */
+
+.letter-container {
+  animation: romanticLetterEntrance 1.5s cubic-bezier(.2,.8,.2,1);
+}
+
+@keyframes romanticLetterEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(60px) scale(0.88);
+    filter: blur(8px);
+  }
+
+  60% {
+    opacity: 1;
+    transform: translateY(-8px) scale(1.02);
+    filter: blur(0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Ajustes para la carta completa */
+
+.app {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.app:has(.letter-container) {
+  align-items: flex-start;
+}
+
+.letter-container {
+  margin: 35px auto;
+  width: 100%;
+}
+
+.letter-card {
+  width: 100%;
+}
+
+.letter-message p {
+  text-align: justify;
+  margin-bottom: 22px;
+}
+
+.letter-card h1 {
+  line-height: 1.4;
+  padding: 0 5px;
+}
+
+@media (max-width: 600px) {
+  .letter-container {
+    margin: 15px auto;
+  }
+
+  .letter-card {
+    padding: 35px 24px;
+  }
+
+  .letter-message {
+    text-align: left;
+    font-size: 15px;
+  }
+}
